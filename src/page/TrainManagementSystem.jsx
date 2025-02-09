@@ -211,15 +211,23 @@ export default function TrainManagement() {
                 ))}
                 </div>
                 <p className="text-gray-600 text-sm">
-                Selected seats: {formData.seats.join(", ") || "None"}
+                    Selected seats: {formData.seats.join(", ") || "None"}
                 </p>
-                <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full mt-4"
-                onClick={nextStep}
-                disabled={formData.seats.length !== formData.passengers}
-                >
-                Next: Passenger Info
-                </button>
+                <div className="flex justify-between"> 
+
+                    <button className="bg-gray-500 text-white px-4 py-2 rounded-lg" onClick={prevStep}>
+                Back
+                    </button>
+                    <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    onClick={nextStep}
+                    disabled={formData.seats.length !== formData.passengers}
+                    >
+                    Next: Passenger Info
+                    </button>
+                </div>
+
+
             </div>
         )}
 
@@ -235,17 +243,46 @@ export default function TrainManagement() {
                     <input type="tel" placeholder="Phone Number" className="p-2 border rounded-lg w-full" />
                 </div>
                 ))}
-                <button 
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg w-full"
+                <div className="flex justify-between"> 
+                    <button className="bg-gray-500 text-white px-4 py-2 rounded-lg" onClick={prevStep}>
+                        Back
+                    </button>
+                    <button 
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                        onClick={nextStep}
+                    >
+                        Confirm Booking 
+                    </button>
+                </div>
+
+
+            </div>
+        )}
+
+        {step === 6 && (
+            <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+            <h2 className="text-lg font-semibold">Step 6: Booking Summary</h2>
+            <p>🚆 Train: {formData.train?.label}</p>
+            <p>📍 Origin: {formData.origin?.label} → {formData.destination?.label}</p>
+            <p>📅 Departure: {formData.departureDate}</p>
+            <p>🪑 Coach: {formData.coach?.label}, Seat: {formData.seats.join(", ")}</p>
+            <p className="text-green-600 font-bold">💰 Total Price: ${totalPrice}</p>
+            <div className="flex justify-between"> 
+                <button className="bg-gray-500 text-white px-4 py-2 rounded-lg" onClick={prevStep}>
+                    Back
+                </button>
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                     onClick={nextStep}
                 >
-                Make Payment
+                    Make Payment
                 </button>
+            </div>
             </div>
         )}
 
         {/* Step 6: Payment */}
-            {step === 6 && (
+            {step === 7 && (
                 <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
                     <h2 className="text-lg font-semibold">Step 6: Payment Details</h2>
                     <p className="text-gray-600">Total Amount: <span className="font-bold text-green-600">$120.00</span></p>
